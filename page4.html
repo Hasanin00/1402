@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Наша история ❤️</title>
+  <style>
+    :root { 
+      --main: #ff4d6d; 
+      --bg: #fff0f3; 
+      --soft: #ffccd5; 
+      --dark: #590d22;
+    }
+
+    body { 
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+      background: var(--bg); 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      min-height: 100vh; 
+      margin: 0; 
+      overflow: hidden; 
+      position: relative;
+    }
+
+    /* ФОНОВЫЕ СЕРДЕЧКИ */
+    .heart {
+      position: absolute;
+      color: var(--main);
+      opacity: 0.2;
+      pointer-events: none;
+      animation: floatUp 6s infinite linear;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.4; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .container { 
+      max-width: 400px; 
+      width: 90%; 
+      text-align: center; 
+      z-index: 10; 
+      animation: fadeIn 1s ease-out; 
+    }
+
+    h1 { 
+      color: var(--main); 
+      font-size: 1.6rem; 
+      margin-bottom: 25px; 
+      text-shadow: 0 2px 10px rgba(255, 77, 109, 0.2);
+    }
+
+    .card { 
+      padding: 20px; 
+      border-radius: 25px; 
+      background: white; 
+      box-shadow: 0 10px 20px rgba(255, 77, 109, 0.1); 
+      border: 2px solid var(--soft); 
+      margin-bottom: 15px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 { 
+      margin: 0; 
+      font-size: 1.3rem; 
+      color: var(--dark); 
+    }
+
+    p { 
+      margin: 10px 0 0; 
+      color: #7d4d5b; 
+      font-size: 0.95rem;
+    }
+
+    /* КНОПКА ПО ЦЕНТРУ */
+    .btn { 
+      background: var(--main); 
+      color: white; 
+      border: none; 
+      padding: 16px 40px; 
+      border-radius: 50px; 
+      font-size: 1.1rem; 
+      cursor: pointer; 
+      margin: 25px auto 0; /* Центрирование через auto */
+      width: fit-content;   /* Ширина по контенту */
+      font-weight: bold; 
+      text-decoration: none; 
+      display: block;      /* Обязательно для margin: auto */
+      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 2px 8px rgba(255, 77, 109, 0.4);
+    }
+
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: translateY(20px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Скрипт для генерации сердечек -->
+  <script>
+    for (let i = 0; i < 15; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <div class="container">
+    <h1>Да, именно 2,5... <br>и это не просто цифры ❤️</h1>
+    
+    <div class="card">
+      <h2>2 289 км</h2>
+      <p>Расстояние, которое нас разделяет</p>
+    </div>
+
+    <div class="card">
+      <h2>24 ч 46 мин</h2>
+      <p>Столько времени нужно, чтобы <br>просто доехать до тебя на машине</p>
+    </div>
+
+    <a href="page5.html" class="btn">Далее </a>
+  </div>
+
+</body>
+</html>

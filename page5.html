@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вопрос ❤️</title>
+  <style>
+    :root { 
+      --main: #ff4d6d; 
+      --bg: #fff0f3; 
+      --soft: #ffccd5; 
+      --dark: #590d22;
+    }
+
+    body { 
+      font-family: 'Segoe UI', Roboto, sans-serif; 
+      background: var(--bg); 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      min-height: 100vh; 
+      margin: 0; 
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ФОНОВЫЕ СЕРДЕЧКИ */
+    .heart {
+      position: absolute;
+      color: var(--main);
+      opacity: 0.15;
+      pointer-events: none;
+      animation: floatUp 6s infinite linear;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.4; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .container { 
+      max-width: 400px; 
+      width: 90%; 
+      text-align: center; 
+      z-index: 10;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    h1 { 
+      color: var(--main); 
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 10px rgba(255, 77, 109, 0.1);
+    }
+
+    .card { 
+      padding: 30px 25px; 
+      border-radius: 30px; 
+      background: white; 
+      border: 2px solid var(--soft); 
+      box-shadow: 0 10px 25px rgba(255, 77, 109, 0.15); 
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: var(--dark);
+      margin-bottom: 25px;
+      font-weight: 500;
+    }
+
+    .option-btn { 
+      background: #fafafa; 
+      color: var(--dark); 
+      border: 2px solid var(--soft); 
+      padding: 15px; 
+      border-radius: 20px; 
+      margin-bottom: 12px; 
+      width: 100%; 
+      cursor: pointer; 
+      font-size: 1.05rem; 
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+      box-sizing: border-box;
+    }
+
+    .option-btn:hover { 
+      background: white;
+      border-color: var(--main);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 77, 109, 0.1);
+      color: var(--main);
+    }
+
+    .option-btn:active {
+      transform: scale(0.96);
+    }
+
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: translateY(20px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    // Создаем сердечки на фоне
+    for (let i = 0; i < 15; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <div class="container">
+    <h1>Вопрос #2 </h1>
+    <div class="card">
+      <p>В каком году мы  <br>познакомились?</p>
+      
+      <div style="margin-top: 10px;">
+        <!-- Передаем правильные параметры для страницы результата -->
+        <button class="option-btn" onclick="location.href='page6.html?ans=0&choice=2022'">2022</button>
+        <button class="option-btn" onclick="location.href='page6.html?ans=0&choice=2016'">2016</button>
+        <button class="option-btn" onclick="location.href='page6.html?ans=1&choice=2019'">2019</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

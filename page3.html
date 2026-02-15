@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Результат ❤️</title>
+  <style>
+    :root { 
+      --main: #ff4d6d; 
+      --bg: #fff0f3; 
+      --soft: #ffccd5; 
+      --correct: #4caf50; 
+      --wrong: #f44336; 
+      --dark: #590d22;
+    }
+
+    body { 
+      font-family: 'Segoe UI', Roboto, sans-serif; 
+      background: var(--bg); 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      min-height: 100vh; 
+      margin: 0; 
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ФОНОВЫЕ СЕРДЕЧКИ */
+    .heart {
+      position: absolute;
+      color: var(--main);
+      opacity: 0.15;
+      pointer-events: none;
+      animation: floatUp 6s infinite linear;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.4; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .container { 
+      max-width: 400px; 
+      width: 90%; 
+      text-align: center; 
+      z-index: 10;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    h1 { 
+      font-size: 2rem; 
+      margin-bottom: 20px; 
+      text-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .card { 
+      padding: 25px; 
+      border-radius: 30px; 
+      background: white; 
+      border: 2px solid var(--soft); 
+      box-shadow: 0 10px 25px rgba(255, 77, 109, 0.15);
+    }
+
+    #message {
+      font-size: 1.1rem;
+      color: #7d4d5b;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .res-btn { 
+      padding: 14px; 
+      border-radius: 18px; 
+      margin-bottom: 12px; 
+      width: 100%; 
+      border: 2px solid var(--soft); 
+      background: #fafafa; 
+      font-weight: 600; 
+      color: var(--dark);
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    /* ЦВЕТА ОТВЕТОВ */
+    .correct { 
+      background: var(--correct) !important; 
+      color: white !important; 
+      border-color: var(--correct) !important;
+      transform: scale(1.02);
+    }
+
+    .wrong { 
+      background: var(--wrong) !important; 
+      color: white !important; 
+      border-color: var(--wrong) !important; 
+    }
+
+    .highlight-correct { 
+      border: 3px solid var(--correct); 
+      box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+    }
+
+    .btn-next { 
+      background: var(--main); 
+      color: white; 
+      border: none; 
+      padding: 16px 45px; 
+      border-radius: 50px; 
+      width: fit-content;
+      margin: 25px auto 0; 
+      cursor: pointer; 
+      text-decoration: none; 
+      display: block; 
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+      transition: 0.3s;
+    }
+
+    .btn-next:active { transform: scale(0.95); }
+
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: scale(0.9); } 
+      to { opacity: 1; transform: scale(1); } 
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    // Создаем сердечки на фоне
+    for (let i = 0; i < 15; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <div class="container">
+    <h1 id="header">Результат</h1>
+    <div class="card">
+      <p id="message"></p>
+      <div id="answersBox">
+        <!-- Важно: id совпадают с параметром choice из URL -->
+        <div class="res-btn" id="opt_1год">1 год</div>
+        <div class="res-btn" id="opt_2.5года">2,5 года</div>
+        <div class="res-btn" id="opt_4месяца">4 месяца</div>
+      </div>
+    </div>
+    <a href="page4.html" class="btn-next">Далее ✨</a>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const isCorrect = urlParams.get('ans') === '1';
+    let choice = urlParams.get('choice') || "";
+    
+    // Убираем пробелы из выбора, чтобы найти ID (например "1 год" -> "1год")
+    const cleanChoice = choice.replace(/\s+/g, '');
+
+    const header = document.getElementById('header');
+    const message = document.getElementById('message');
+
+    if (isCorrect) {
+      header.innerText = "Правильно! 🎉";
+      header.style.color = "var(--correct)";
+      message.innerText = "Ну прям нормально так — целых 2,5 года! ❤️";
+      const el = document.getElementById('opt_' + cleanChoice);
+      if(el) el.classList.add('correct');
+    } else {
+      header.innerText = "Эййй! 🙊";
+      header.style.color = "var(--wrong)";
+      message.innerText = "Как хорошо, что я не знаю, что ты выбрала... На самом деле нам уже 2,5 года!";
+      const el = document.getElementById('opt_' + cleanChoice);
+      if(el) el.classList.add('wrong');
+      document.getElementById('opt_2.5года').classList.add('highlight-correct');
+    }
+  </script>
+</body>
+</html>
